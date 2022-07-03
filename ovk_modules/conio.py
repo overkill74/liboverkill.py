@@ -3,23 +3,23 @@ import functools
 from ovk_modules.private.conio_console import *
 
 
-class Conio():
-    """
-    Conio class declaration
-    This is a pure virtual class
-    """
-
-    def is_kbhit(self):
-        # is_kbhit
-        ...
-
-    def get_char(self):
-        # getCh
-        ...
-
-    def put_ch(self, ch):
-        # putch
-        ...
+# class Conio():
+#     """
+#     Conio class declaration
+#     This is a pure virtual class
+#     """
+#
+#     def is_kbhit(self):
+#         # is_kbhit
+#         ...
+#
+#     def get_char(self):
+#         # getCh
+#         ...
+#
+#     def put_ch(self, ch):
+#         # putch
+#         ...
 
 
 class ConioConsole(ConioConsole):
@@ -35,5 +35,11 @@ class ConioConsole(ConioConsole):
     def get_char(self):
         return self.kb_hit.getch()
 
-    def put_ch(self, ch):
-        return self.kb_hit.put_ch(ch)
+    def put_char(self, ch):
+        self.kb_hit.putch(ch)
+
+    def read_line(self) -> str:
+        return self.kb_hit.read_line()
+
+    def write_str(self, txt) -> str:
+        self.kb_hit.write_str(txt)

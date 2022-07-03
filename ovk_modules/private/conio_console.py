@@ -17,6 +17,7 @@ if os.name == 'nt':  # Windows
     import msvcrt
 else:  # Posix (Linux, OS X)
     os = 'LINUX'
+    import gnureadline
     import sys
     import termios
     import atexit
@@ -38,7 +39,13 @@ class ConioConsole():
     def kbhit(self):
         BaseException(self)
 
-    def put_ch(self, ch):
+    def putch(self, ch):
+        BaseException(self)
+
+    def read_line(self) -> str:
+        BaseException(self)
+
+    def write_str(self, txt):
         BaseException(self)
 
 
@@ -67,8 +74,14 @@ class ConioConsolePosix(ConioConsole):
         dr, dw, de = select([sys.stdin], [], [], 0)
         return dr != []
 
-    def put_ch(self, ch):
-        return sys.stdout.write(ch)
+    def putch(self, ch):
+        sys.stdout.write(ch)
+
+    def read_line(self) -> str:
+        return sys.stdin.readline()
+
+    def write_str(self, txt):
+        sys.stdout.write(txt)
 
 
 class ConioConsoleWinows(ConioConsole):
@@ -81,8 +94,19 @@ class ConioConsoleWinows(ConioConsole):
     def kbhit(self):
         return msvcrt.kbhit()
 
-    def put_ch(self, ch):
+    def putch(self, ch):
         return msvcrt.putch(ch)
+
+    def read_line(self) -> str:
+        rv = ""
+        while msvcrt.kbhit():
+            rv += msvcrt.getche().decode('utf-8')
+        return rv
+
+    def write_str(self, txt):
+        for el in txt:
+            msvcrt.putch(el)
+
 
 
 class ConioConsolleBuilder(ConioConsole):
