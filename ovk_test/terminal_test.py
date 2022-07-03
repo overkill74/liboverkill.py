@@ -7,20 +7,23 @@ from ovk_modules.terminal import *
 class TerminalTest:
     def __init__(self):
         self.cmd = [
-            {'cmd': 'AAA', 'desc': 'COMANDO_A', 'exe': 'self.fun_aaa'},
-            {'cmd': 'BBB', 'desc': 'COMANDO_B', 'exe': 'self.fun_bbb'},
-            {'cmd': 'CCC', 'desc': 'COMANDO_C', 'exe': 'self.fun_ccc'},
+            {'cmd': 'AAA', 'desc': 'COMANDO_A', 'exe': self.fun_aaa},
+            {'cmd': 'BBB', 'desc': 'COMANDO_B', 'exe': self.fun_bbb},
+            {'cmd': 'CCC', 'desc': 'COMANDO_C', 'exe': self.fun_ccc},
         ]
         self.terminal = OvkTerminal(self.cmd)
 
     def fun_aaa(self):
         print("I am AAA")
+        return 0
 
     def fun_bbb(self):
         print("I am BBB")
+        return 0
 
     def fun_ccc(self):
         print("I am CCC")
+        return -1
 
     def run_test(self):
         """ The terminal test """

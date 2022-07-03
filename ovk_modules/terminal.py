@@ -51,7 +51,11 @@ class OvkTerminal:
                             if exefun is None:
                                 print("Missing exec function")
                             else:
-                                eval(exefun)("a")
+                                exe_res = exefun()
+                                if exe_res == 0:
+                                    print("000 OK")
+                                else:
+                                    print(f"000 FAIL ({exe_res})")
                             break
                     if not cmd_found:
                         print(f"Unknown command {self.command}")
